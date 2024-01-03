@@ -37,8 +37,8 @@ server <- function(input, output, session) {
       fitBounds(~min(long), ~min(lat), ~max(long), ~max(lat))
   })
   
-  # Incremental changes to the map (in this case, replacing the circles when a new color is chosen) should be performed in
-  # an observer. Each independent set of things that can change
+  # Incremental changes to the map (in this case, replacing the circles when a new color is chosen) 
+  # should be performed in an observer. Each independent set of things that can change
   # should be managed in its own observer.
   observe({
     pal <- colorpal()
