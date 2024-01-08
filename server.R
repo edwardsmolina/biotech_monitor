@@ -9,35 +9,7 @@ dat <- read.csv("data/spodoptera.csv")
 # str(dat)
 # unique(dat$trait)
 
-# Choices for drop-downs
-vars <- c(
-  "Daño vegetativo" = "spod_veg",
-  "Daño en mazorca" = "spod_rep")
-
-ui <- bootstrapPage(
-  tags$style(type = "text/css", "html, body {width:100%;height:100%}"),
-  leafletOutput("map", width = "100%", height = "100%"),
-  absolutePanel(top = 10, right = 10,
-                sliderInput("range", "Season", 
-                            min(dat$FIELD_plantingSeason), 
-                            max(dat$FIELD_plantingSeason),
-                            value = range(dat$FIELD_plantingSeason), 
-                            step = 1
-                ),
-                
-                selectInput("trait", "Trait", vars),
-                
-                # selectInput("colors", "Color Scheme",
-                #             rownames(subset(brewer.pal.info, category %in% c("seq", "div")))
-                # ),
-                
-                selectInput("biotech", "Biotech", unique(dat$createdTechnology))
-                
-                # checkboxInput("legend", "Show legend", TRUE)
-  )
-)
-
-server <- function(input, output, session) {
+function(input, output, session) {
   
   # Reactive expression for the data subsetted to what the user selected
   filteredData <- reactive({
@@ -76,21 +48,5 @@ server <- function(input, output, session) {
                  fillOpacity = 0.7, popup = ~paste(OBS_numValue, createdTechnology)
       )
   })
-  
-  # Use a separate observer to recreate the legend as needed.
-  # observe({
-  #   proxy <- leafletProxy("map", data = dat)
-  #   
-  # Remove any existing legend, and only if the legend is
-  # enabled, create a new one.
-  # proxy %>% clearControls()
-  # if (input$legend) {
-  #   pal <- colorpal()
-  #   proxy %>% addLegend(position = "bottomright",
-  #                       pal = pal, values = ~OBS_numValue
-  #   )
-  # }
-  # })
-}
+  }
 
-shinyApp(ui, server)
