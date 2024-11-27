@@ -1,0 +1,247 @@
+OBS_observationRefCd,OBS_descriptorAbbreviation,Secondary_Questions
+YM_BE,,
+YM,,
+YLDTM,,
+WEEDCVRP,,
+TWT_BE,,
+TWT,,
+TWT,,
+TVCVRP,,
+TILP,,
+TILC_SUB,,
+TILC,,
+TILC,,GS:V10
+TILC,,GS:R5
+TILC,,GS:r5
+TILC,,GS:R1
+TILC,,GS:v10
+TGWT_BE,,
+TGWT,,
+TGWT,,
+TGTDPOP,,
+TGSPP,,
+TDPP,,
+TDPP,,
+TDPC,,
+STLP,,
+STLP,,
+STLC,,
+STLC,,GS:Pre-Harvest
+STLC,,GS:R6
+STLC,,GS:R5
+STLC,,GS:r6
+STLC,,GS:V10
+SP,Final,SCTYPE:Final
+SP,Intended Final,SCTYPE:Intended Final
+SOILNTRP,,"FDYZT:Zone 1, NUTR:Nitrogen, SOILD:20-40cm"
+SOILNTRP,,"FDYZT:Zone 1, NUTR:Nitrogen, SOILD:0-20cm"
+SOILNTRP,,"FDYZT:Zone 2, NUTR:Nitrogen, SOILD:0-20cm"
+SOILNTRP,,"FDYZT:Zone 1, NUTR:Nitrogen, SOILD:40-60cm"
+SOILNTRP,,"FDYZT:Zone 2, NUTR:Nitrogen, SOILD:40-60cm"
+SOILNTRP,,"FDYZT:Zone 2, NUTR:Nitrogen, SOILD:20-40cm"
+SELGTM,,
+SDPLN,ERTCPX,
+SDPCNT,,
+SDP,GIBBZE,
+SC,,SCTYPE:Final
+SC,,"SCTYPE:Final, SUBAREA:OPEN"
+SC,Intended Final,SCTYPE:Intended Final
+SC,Final,SCTYPE:Final
+SC,Final,"SCTYPE:Final, SUBAREA:10"
+SBLR,,
+RWD,,AGGT:Average
+RTLP,,
+RTLP,,
+RTLC,,
+RTLC,,GS:Pre-Harvest
+RTLC,,GS:V3
+RTLC,,GS:R6
+RTLC,,GS:R5
+RTLC,,GS:r6
+RINTP,,GS:V6
+RINTP,,GS:R1
+RINTP,,GS:R4
+REPLTCNT,,ROWN:4
+REPLTCNT,,ROWN:3
+REPLTCNT,,ROWN:2
+REPLTCNT,,ROWN:1
+REMERGP,,ROWN:3
+REMERGP,,ROWN:1
+REMERGP,,ROWN:4
+REMERGP,,ROWN:2
+PV,,
+PV,,PVTYPE:Early
+PSPCROW,,AGGT:Average
+PSEP,,PLTRSET:Skip
+PSEP,,
+PSEP,,PLTRSET:Multiple
+PSA,,AGGT:Average
+PP,,
+PLW,,AGGT:Average
+PLTDT,,
+PLNTGYLD,,
+PLNTGYLD,,FDYZT:Zone 2
+PLNTGYLD,,FDYZT:Zone 3
+PLNTGYLD,,FDYZT:Zone 1
+PHTAE,,
+PHT,,
+PHT,,"GS:V3, MEASTO:Flag Leaf Collar"
+PHT,,"GS:V8, MEASTO:Flag Leaf Collar"
+PHT,,"GS:V6, MEASTO:Flag Leaf Collar"
+PHT,,"GS:R3, MEASTO:Flag Leaf Collar"
+PHT,,"GS:V10, MEASTO:Flag Leaf Collar"
+PHT,,"GS:V12, MEASTO:Flag Leaf Collar"
+PHT,,"GS:R1, MEASTO:Flag Leaf Collar"
+PDSR,,PESTNAM:Rhopalosiphum maidis
+PDPLC,,
+PDIP,,"PESTNAM:Spodoptera frugiperda, PPRL:'PDSR >= 3'"
+PDIC,,"PESTNAM:Spodoptera frugiperda, PPRL:'>= 3',  "
+PDIC,Spodoptera frugiperda,"GS:V8, PESTNAM:Spodoptera frugiperda, PESTT:Insect, PPRL:PDSR >= 3"
+PDAMA,,PESTNAM:Not Applicable
+PDAMA,,PESTNAM:Spodoptera frugiperda
+PDAMA,,PESTNAM:Helicoverpa zea
+NOHAS_SUB,DIATSA,
+NOHAS,DIATSA,
+NFORM,,
+MST_BE,,
+MST_BE,,
+MST,,
+MST,,
+LIPPN1_N4,DCHLFU,
+LIPPN1_N3,DCHLFU,
+LIPPN1_N2,DCHLFU,
+LIPPN1_N1,DCHLFU,
+LIPPN1_N0,DCHLFU,
+LAPNPCT,,"GS:R2, IRRT:Other, LQDT:Water, MEASAT:50% plant height"
+LAPNPCT,,"GS:V10, IRRT:Other, LQDT:Water, MEASAT:50% plant height"
+LAPNPCT,,"GS:V6, IRRT:Other, LQDT:Water, MEASAT:50% plant height"
+KPR,E1ROW1,
+HWT,,
+HVPOP,,
+HVPOP,,
+HPLW,,
+HPLL,,
+HARVX,,GS:R6
+HARVX,,
+GYMBER,,
+GYM,,
+GYLD_BE,,
+GYLD_BE,,
+GYLD,,
+GYLD,,
+GWT,,GCNTT:1000
+GSPP_Z,,
+GSPP,,
+GSPP,,
+GSPC,,SUBAREA:OPEN
+GSPC,,
+GSPC,,"GS:R1, GSPT:Natural"
+GSPC,,"GS:r1, GSPT:Natural"
+GSPC,,"GS:R3, GSPT:Natural"
+GSDT,,GS:V6
+GSDT,,GS:VE
+GSDT,,GS:R1
+GSDT,,GS:R4
+GSDT,,GS:R6
+GSDT,,GS:Ve
+GSD,,GS:50% Pollen Shed
+GSD,,GS:50% Silk Protusion
+GSD,,GS:Maturity
+GSD,,GS:R4
+GSD,,GS:V6
+GSD,,GS:R6
+GSD,,GS:VE
+GSD,,GS:R1
+GMSTP,DAY2,"ACT:Drying, DAM:2"
+GMSTP,DAY6,"ACT:Drying, DAM:6"
+GMSTP,DAY12,"ACT:Drying, DAM:12"
+GMSTP,DAY13,"ACT:Drying, DAM:13"
+GMSTP,DAY9,"ACT:Drying, DAM:9"
+GMSTP,DAY10,"ACT:Drying, DAM:10"
+GMSTP,DAY1,"ACT:Drying, DAM:1"
+GMSTP,DAY7,"ACT:Drying, DAM:7"
+GMSTP,DAY14,"ACT:Drying, DAM:14"
+GMSTP,DAY11,"ACT:Drying, DAM:11"
+GMSTP,DAY4,"ACT:Drying, DAM:4"
+GMSTP,DAY8,"ACT:Drying, DAM:8"
+GMSTP,DAY3,"ACT:Drying, DAM:3"
+GMSTP,DAY5,"ACT:Drying, DAM:5"
+GMSTP,DAY15,"ACT:Drying, DAM:15"
+GGSSP,,
+FRTNM,,"FDYZT:Zone 1, GS:Planting"
+FRTNM,,"FDYZT:Zone 2, GS:Planting"
+FRTNM,,"FDYZT:Zone 3, GS:Planting"
+EXSN,0-60 cm,
+EXSN,0-20 cm,
+EXSN,20-40 cm,
+EXSN,40-60 cm,
+ERPOP,,
+EMERGP,,
+EMERGDT,,
+EMERG,,
+EMERG,,
+EHT,,
+EHT,,"GS:R3, MEASTO:Base of Primary Ear"
+EHT,,"GS:R6, MEASTO:Base of Primary Ear"
+EHT,,"GS:R4, MEASTO:Base of Primary Ear"
+EGYLDPP,,
+ECBGL,,
+ECBGL,,
+EARC,,TISTY:Secondary Ear
+EABP,,
+DSSFA,,
+DSR,SETOTU,"PATHOGEN:Exserohilum turcicum, TISTY:Leaf"
+DSR,PUCCSO,"PATHOGEN:Puccinia sorghi, TISTY:Leaf"
+DSR,CERCZM,"PATHOGEN:Cercospora zeae-maydis, TISTY:Leaf"
+DSR,CERCSP,"PATHOGEN:Cercospora sp., TISTY:Leaf"
+DSR,COCHHE,"PATHOGEN:Bipolaris maydis, TISTY:Leaf"
+DSR,PUCCPY,"PATHOGEN:Puccinia polysora, TISTY:Leaf"
+DSR,DIPDMA,"PATHOGEN:Diplodia macrospora, TISTY:Leaf"
+DSR,SPIRKU,"PATHOGEN:Corn Stunt Complex, TISTY:Above Ground"
+DSR,PHSPMA,"PATHOGEN:Phaeosphaeria maydis, TISTY:Leaf"
+DSR,PSDMAV,"PATHOGEN:Acidovorax avenae, TISTY:Leaf"
+DOPLP,,
+DOPLP,,
+DOPLNC,,
+DOPLNC,,SUBAREA:OPEN
+DOPLNC,,
+DOFIRSTSPR,,
+DINP,USTIMA,"PATHOGEN:Ustilago maydis, TISTY:Ear"
+DINP,ERMX,"PATHOGEN:Ear Rot Mixture, TISTY:Ear"
+DINP,GIBBZE,"PATHOGEN:Gibberella zeae, TISTY:Stalk, SCTYPE:Final"
+DINP,ZZXXFF,"PATHOGEN:Unknown-Fungal, TISTY:Stalk, SCTYPE:Final"
+DINP,FUSASP,"PATHOGEN:Fusarium sp., TISTY:Stalk"
+DINP,ZZXXFF,"PATHOGEN:Unknown-Fungal, TISTY:Stalk"
+DINP,Gibberella zeae,"PATHOGEN:Gibberella zeae, TISTY:Grain"
+DINC,SPIRKU,"PATHOGEN:Spiroplasma kunkelii + Maize bushy stunt phytoplasma, TISTY:Leaf"
+DINC,MRCV00,"PATHOGEN:Mal de Rio Cuarto virus, TISTY:Leaf, DSL:Severe"
+DINC,MRCV00,"PATHOGEN:Mal de Rio Cuarto virus, TISTY:Leaf, DSL:Slight"
+DINC,MRCV00,"PATHOGEN:Mal de Rio Cuarto virus, TISTY:Leaf, DSL:Moderate"
+DINC,USTIMA,"PATHOGEN:Ustilago maydis, TISTY:Ear"
+DINC,ZZXXFF,"PATHOGEN:Unknown-Fungal, TISTY:Stalk"
+DINC,GIBBZE,"PATHOGEN:Gibberella zeae, TISTY:Stalk"
+DEFG,,CDEFG:Rotten
+DDRD,DAY16,
+DDRD,DAY17,
+CMNTS,,
+CMNTS,,CMNTS_TYPE:Hybrid
+CMNTS,,GS:Post-Harvest/Volunteer Monitoring
+CCVR,,
+BARP,,
+BARN,,
+ASI50D,,
+AREA_SUB,,
+APP_RATE_MA,,NUTR:Nitrogen
+APP_RATE_MA,,NUTR:Phosphorus
+APP_RATE_MA,,"CHMPDT:Total P2O5, FDYZT:Zone 3, GS:Planting"
+APP_RATE_MA,,"CHMPDT:Total Nitrogen, FDYZT:Zone 3, GS:Planting"
+APP_RATE_MA,,"CHMPDT:Total P2O5, FDYZT:Zone 1, GS:Planting"
+APP_RATE_MA,,"CHMPDT:Total Nitrogen, FDYZT:Zone 2, GS:Planting"
+APP_RATE_MA,,"CHMPDT:Total P2O5, FDYZT:Zone 2, GS:Planting"
+APP_RATE_MA,,"CHMPDT:Total Nitrogen, FDYZT:Zone 1, GS:Planting"
+ACHDTG,,GDUTEMP:6 Celsius
+ACHDTG,,GDUTEMP:8 Celsius
+ACHDTG,,GDUTEMP:10 Celsius
+ACHDT,,
+2ERPP,,TISTY:Secondary Ear
+,,

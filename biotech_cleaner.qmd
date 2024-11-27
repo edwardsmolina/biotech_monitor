@@ -1,0 +1,132 @@
+---
+title: "Biotechs Conosur"
+editor_options: 
+  chunk_output_type: console
+---
+
+## Data wrangling
+
+```{r}
+# pla <- readr::read_csv("data/biotech_conosur_2024-06-26.csv") 
+raw <- readr::read_csv("data/plagas_conosur_23.csv") %>% 
+  unite("trait", OBS_observationRefCd, OBS_descriptorAbbreviation, remove = T, sep = ".") %>% 
+  mutate(trait = str_replace(trait, ".N/A", "")) %>% 
+  unite("year_loc", FIELD_plantingSeason, FIELD_name, remove = F, sep = ".")  
+
+    # separate(OBS_observationRefCd, into=c("trait", "SUB"), 
+    #          remove = T) 
+raw %>% names
+pla %>% distinct(trait)
+pla %>% distinct(createdTechnology)
+```
+
+
+## Biotechs 
+
+Verificar aquellos faltantes de "eventos" 
+
+```{r, eval=FALSE}
+raw %>% count(createdTechnology, sort=TRUE) %>% data.frame
+
+raw %>% 
+  filter(is.na(createdTechnology)) %>% 
+  count(commercialName, sort=TRUE)
+```
+
+Reemplazar "NAs" de eventos por los comercial_names
+
+```{r}
+dat0 <- raw %>%
+   # unite("trait", OBS_observationRefCd, OBS_descriptorAbbreviation, 
+         # sep = ".") %>% 
+  mutate(createdTechnology2 = 
+           if_else(is.na(createdTechnology), commercialName, createdTechnology)) %>% 
+  mutate(createdTechnology3 = case_when(
+    str_detect(createdTechnology2, 'TRE|FHJ1') ~'TRE',
+    str_detect(createdTechnology2, 'PWU') ~ 'PWU',
+    str_detect(createdTechnology2, 'PRO2') ~ 'PRO2',
+    str_detect(createdTechnology2, 'PRO3|VT3P|MQK1') ~ 'VT3P',
+    str_detect(createdTechnology2, 'PRO4') ~ 'PRO4',
+    str_detect(createdTechnology2, 'VYHR') ~ 'VYHR',
+    str_detect(createdTechnology2, 'VIP3|VIPTERA3') ~ 'VIP3',
+    str_detect(createdTechnology2, 'RR') ~ 'RR',
+    str_detect(createdTechnology2, 'FS500') ~ 'CONV'))
+# dat0 %>% count(createdTechnology2)
+```
+
+```{r PW_PWU, eval=FALSE} 
+dat0 %>% 
+  select(commercialName, contains("createdTechnology")) %>% 
+  filter(str_detect(createdTechnology2, 'PW')) %>% # solo PW.
+  distinct %>% 
+  head(50) %>% 
+  data.frame
+```
+
+...Faltan los PW
+
+```{r}
+# table(is.na(dat0$createdTechnology3))
+pw <- dat0 %>%
+  filter(!complete.cases(createdTechnology3)) %>% 
+  mutate(createdTechnology3 = case_when(
+    str_detect(createdTechnology2, 'PW') ~ 'PW', 
+    TRUE ~ createdTechnology2)) 
+
+pw %>%  
+  select(contains("createdTechnology")) %>%
+  distinct %>%
+  data.frame
+```
+
+```{r}
+tech <- c("RR","VT3P","PRO4","TRE", # DK
+          "PWU",                    # Corteva 
+          "VYHR",                   # Pionner
+          "VIP3"                    # Syng
+)
+
+dat <- bind_rows(
+  dat0 %>% filter(complete.cases(createdTechnology3)), 
+  pw
+) %>% 
+  select(-createdTechnology, -createdTechnology2) %>% 
+  rename(createdTechnology=createdTechnology3) %>% 
+  filter(createdTechnology %in% tech) %>% 
+  mutate(base_gen = case_when(
+    str_detect(commercialName, 'DK7272') ~'DK7272',
+    str_detect(commercialName, 'DK7210') ~'DK7210',
+    str_detect(commercialName, 'NEXT226') ~'NEXT226',
+    str_detect(commercialName, 'NK842') ~'NK842'
+    )) %>% 
+    mutate(crop_season = if_else(FIELD_plantingDate < ymd('2023-11-15'), "Early", "Late")) 
+
+```
+
+```{r eval=FALSE}
+dat %>% 
+  filter(createdTechnology=="PWU") %>% 
+  count(createdTechnology, commercialName, year_loc) %>% 
+  arrange(year_loc, createdTechnology) %>% 
+  data.frame
+```
+
+
+```{r  eval=FALSE}
+unique(dat$trait) %>% sort %>% data.frame
+dim(raw); dim(dat)
+unique(dat$createdTechnology)
+```
+
+```{r export-csv, eval=FALSE}
+dat %>%
+  export(file = paste0('data/biotech_conosur_',
+                       format(Sys.time(), "%Y-%m-%d"),
+                       '.csv'))
+```
+
+```{r}
+bq_upld(project = .MDlake,
+        bqtable = "bcs-market-dev-lake.latam_md_corn.biotech_conosur", 
+        localtable = dat)
+```

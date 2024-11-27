@@ -1,0 +1,171 @@
+---
+title: "Biotechs Conosur"
+editor_options: 
+  chunk_output_type: console
+---
+
+## Session setup
+
+```{r setup}
+pacman::p_load(tidyverse)
+# pacman::p_load(tidyverse) # only explore after querying 
+# conflicted::conflict_prefer("filter", "dplyr")
+```
+
+```{r}
+biotech_conosur <- readr::read_csv("data/biotech_conosur_2024-06-26.csv")
+dat <- readr::read_csv("data/plagas_conosur_23.csv")
+```
+
+```{r eval=FALSE}
+dat %>% glimpse
+```
+
+```{r eval=FALSE}
+biotech_conosur %>% 
+  count(FIELD_plantingSeason) 
+```
+
+## Spodoptera
+
+```{r}
+spod <- dat %>% 
+  # count(FIELD_plantingDate, OBS_observationRefCd) %>% 
+  filter(str_detect(OBS_observationRefCd, "DSSF|SF9_SUB")) # %>% mutate(RDR_damage_class=NA, EAR_damage_class=NA)
+
+spod |> distinct(OBS_observationRefCd, OBS_descriptorAbbreviation)
+```
+
+```{r eval=FALSE}
+hibs <- c("DK7272TRE", "DK7210PRO4", "DK7210RR2", "DK7272VT3P", "NEXT226PWUE", "NK842VIPTERA3")
+
+spod %>% 
+  filter(commercialName %in% hibs) %>% 
+  ggplot()+
+  facet_wrap("FIELD_pipeline") + 
+  aes(y=commercialName, x=OBS_numValue) +
+  geom_boxplot(alpha=.5) +
+  # geom_(alpha=.5, height =.1) + 
+  facet_grid(.~OBS_observationRefCd)
+```
+
+## Diatraea
+
+Nro de orificios por tallo
+
+```{r}
+dia <- dat %>% 
+  # count(FIELD_plantingDate, OBS_observationRefCd) %>% 
+  filter(str_detect(OBS_observationRefCd, "NOHAS")) # %>% mutate(RDR_damage_class=NA, EAR_damage_class=NA)
+```
+
+```{r eval=FALSE}
+hibs <- c("DK7272TRE", "DK7210PRO4", "DK7210RR2", "DK7272VT3P", "NEXT226PWUE", "NK842VIPTERA3")
+
+dia %>% 
+  filter(commercialName %in% "DK7210RR2") %>% 
+# count(OBS_numValue)
+  # filter(commercialName %in% hibs) %>% 
+  ggplot()+
+  aes(y=commercialName, x=OBS_numValue) +
+  geom_boxplot(alpha=.5) +
+  geom_point(alpha=.5, height =.1) + 
+  facet_grid(.~OBS_observationRefCd)
+```
+ > hacer mapa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+spod_veg %>% 
+  pivot_wider(names_from = OBS_code, 
+              values_from = OBS_numValue)-> spod_wide
+```
+
+
+```{r}
+field = "ATUCK1_QUIMILI_RYK_F"	
+season = "2020"	
+hyb =	"DK7210VT3P"
+
+biotech %>% 
+  filter(FIELD_name==field, FIELD_plantingSeason==season, commercialName==hyb) %>% 
+  select(FIELD_name, FIELD_plantingSeason, commercialName, OBS_code, OBS_numValue) %>% 
+  arrange(OBS_code)
+```
+
+```{r}
+pull(DSSFN)
+  ggplot()+
+  aes(x=DSSFN, y=DSSFP) +
+  geom_point(alpha=.5) + 
+  facet_grid(FIELD_Country~ FIELD_plantingSeason, scales="free")
+```
+
+```{r eval=FALSE}
+spod_veg %>% 
+  filter(OBS_numValue>100) %>% 
+  select(FIELD_Country, FIELD_plantingSeason, FIELD_name, OBS_code, OBS_numValue)
+
+field1 = "ATUCK1_RIOMUERTO_VICENTIN_F"	
+season1 = "2020"	
+# hyb =	"DK7210VT3P"
+
+spod_veg %>% 
+  filter(FIELD_name==field1, FIELD_plantingSeason==season1) %>% 
+  select(FIELD_Country, FIELD_plantingSeason, FIELD_name, OBS_code, OBS_numValue) %>% 
+  arrange(OBS_code) %>% 
+  data.frame
+```
+
+```{r}
+spod_veg %>% 
+  filter(OBS_code=="DSSFN", FIELD_year==2023) %>% 
+  select(FIELD_Country, FIELD_year, FIELD_name, OBS_code, OBS_numValue) %>% 
+  data.frame
+
+```
+
+### Ear Damage
+
+```{r}
+ear_damage <- biotech_conosur %>% 
+  filter(str_detect(OBS_code, "DAEAR|HZ9|SF9")) %>%
+  filter(str_detect(OBS_code, "SUB")) # %>%
+  # mutate(EAR_damage_class =
+  #          cut(OBS_numValue, 
+  #              breaks=c(-Inf, 0.01, 2, 4, Inf), 
+  #              labels=c("No Damage","Low Damage","Medium Damage","High Damage"))
+         # ) # %>% filter(!is.na(EAR_damage_class))
+```
+
+```{r eval=FALSE}
+ear_damage %>% 
+  ggplot()+
+  aes(x=OBS_numValue, OBS_code, col=OBS_code) +
+  geom_violin(alpha=.5) + 
+  geom_jitter(alpha=.5, height =.1) + 
+  facet_grid(FIELD_Country~ FIELD_year, scales="free")
+```
+
+```{r eval=FALSE}
+ear_damage %>% 
+  filter(OBS_numValue>100) %>% 
+  select(FIELD_Country, FIELD_year, FIELD_name, OBS_code, OBS_numValue)
+```
+
