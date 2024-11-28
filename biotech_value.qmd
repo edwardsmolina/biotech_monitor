@@ -11,7 +11,7 @@ pacman::p_load(tidyverse, rio)
 
 #https://console.cloud.google.com/bigquery?ws=!1m7!1m6!12m5!1m3!1sbcs-market-dev-lake!2ssouthamerica-east1!3sb88fa74a-59b9-476a-8d05-72fcab2b99fe!2e1
 
-source("C:/Users/GOXWW/Documents/github_edwardsmolina/spirku/spirku24/mutate_custom.R", echo=F)
+source("mutate_custom.R", echo=F)
 
 theme_PH <- cowplot::theme_half_open()+
   theme(
@@ -48,17 +48,19 @@ dat |> count(SETS_setName)
 dat |> count(biotech)
 dat |> count(FIELD_plantingDate)
 dat |> count(FIELD_pipeline, crop_season, mdr)
-dat |> count(FIELD_plantingSeason, FIELD_pipeline, commercialName, biotech) |> data.frame()
+
+dat |> 
+  count(FIELD_plantingSeason, FIELD_pipeline, plain_name, biotech)|>
+  pivot_wider(names_from=biotech,values_from=n) |>
+  data.frame()
 ```
 
 Within field comparisons
 
- 
-
 ```{r}
 dat_wide <- dat |> 
   filter(OBS_observationRefCd=="GYLD") |> 
-  select(id, FIELD_plantingSeason, FIELD_pipeline, mdr, SETS_setName, plain_name, biotech, YLD) |> 
+  select(id, FIELD_plantingSeason, FIELD_pipeline, mdr, crop_season, SETS_setName, plain_name, biotech, YLD) |> 
   pivot_wider(names_from="biotech", values_from = "YLD", values_fn =mean) |> 
   mutate_all(~ replace(., is.null(.), NA)) |> 
   data.frame() |> 
@@ -84,7 +86,7 @@ dat_wide |>
   facet_wrap(vars(FIELD_pipeline,mdr)) + 
   geom_boxplot(width=0.2, fill="grey70") + 
   geom_point(alpha=.2) + 
-  stat_summary(aes(label=round(..y..)), col="red", 
+  stat_summary(aes(label=round(after_stat(y))), col="red", 
                fun=median, geom="text", size=3, hjust = 2.2)   + 
   labs(title="PRO4 - value",
        subtitle="Calculated as within field YLD difference (qq) against same genotipe with RR2 biotech",
@@ -101,7 +103,7 @@ dat_wide |>
   facet_wrap(vars(FIELD_pipeline)) + 
   geom_boxplot(width=0.1, fill="grey70") + 
   geom_point(alpha=.2) + 
-  stat_summary(aes(label=round(..y..)), col="red", 
+  stat_summary(aes(label=round(after_stat(y))), col="red", 
                fun=median, geom="text", size=4, hjust = 2.2)   + 
   labs(title="PRO4 - value",
        subtitle="Calculated as within field YLD difference (qq) against same genotipe with RR2 biotech",
@@ -120,7 +122,7 @@ dat_wide |>
   facet_wrap(vars(FIELD_pipeline,mdr)) + 
   geom_boxplot(width=0.2, fill="grey70") + 
   geom_point(alpha=.2) + 
-  stat_summary(aes(label=round(..y..)), col="red", 
+  stat_summary(aes(label=round(after_stat(y))), col="red", 
                fun=median, geom="text", size=3, hjust = 2.1) +   
    labs(title="TRECEPTA value",
        subtitle="Calculated as within field YLD difference (qq) against same genotipe with VT3P biotech",
@@ -140,6 +142,41 @@ dat_wide |>
   stat_summary(aes(label=round(..y..)), col="red", 
                fun=median, geom="text", size=3, hjust = 3) +   
    labs(title="TRECEPTA value",
+       subtitle="Calculated as within field YLD difference (qq) against same genotipe with VT3P biotech",
+       y="qq", 
+       x="Planting season")
+```
+
+
+```{r}
+dat_wide |> 
+  filter(TRE_PRO3>-20) |> 
+  filter(!mdr=="GFXVN") |> 
+  ggplot() + 
+  aes(x=factor(FIELD_plantingSeason),y=TRE_PRO3)+
+  facet_wrap(vars(FIELD_pipeline, crop_season)) + 
+  geom_boxplot(width=0.2, fill="grey70") + 
+  geom_point(alpha=.2) + 
+  stat_summary(aes(label=round(..y..)), col="red", 
+               fun=median, geom="text", size=3, hjust = 3) +   
+   labs(title="TRECEPTA value",
+       subtitle="Calculated as within field YLD difference (qq) against same genotipe with VT3P biotech",
+       y="qq", 
+       x="Planting season")
+```
+
+```{r}
+dat_wide |> 
+  filter(TRE_PRO3>-20) |> 
+  filter(!mdr=="GFXVN") |> 
+  ggplot() + 
+  aes(x=factor(FIELD_plantingSeason),y=TRE_PRO3, col=plain_name)+
+  facet_wrap(vars(FIELD_pipeline)) + 
+  geom_boxplot(width=0.2, fill="grey70") + 
+  geom_point(alpha=.2) + 
+  stat_summary(aes(label=round(..y..)), col="red", 
+               fun=median, geom="text", size=3, hjust = 3) +   
+  labs(title="TRECEPTA value",
        subtitle="Calculated as within field YLD difference (qq) against same genotipe with VT3P biotech",
        y="qq", 
        x="Planting season")
